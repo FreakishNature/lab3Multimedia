@@ -11,10 +11,28 @@
             left: 700px;
             top: 20px;
         }
+        
         #temprature{
             position: absolute;
             left: 700px;
             top: 60px;
+        }
+
+        #startData{
+            position: absolute;
+            top: 450px;
+        }
+        #startData button{
+            position: absolute;
+            left: 250px;
+            top: -30px;
+        }
+        #startData div{
+            margin-top: 20px;
+        }
+        #save{
+            position: absolute;
+            top: 600px;
         }
     </style>
 </head>
@@ -30,7 +48,30 @@
         <option value="NORMAL">NORMAL</option>
         <option value="COLD">COLD</option>
     </select>
+    
+    <div id="startData">
+        <button onclick="startGame()" >
+            START WAR
+        </button>
+    
+        <div>
+            <label for="health">Health : </label>
+            <input type="text" id="health" value="100">
+        </div>
+    
+        <div>
+            <label for="healthLost">Health losing : </label>
+            <input type="text" id="healthLost" value="1">
+        </div>
         
+        <div>
+            <label for="dmgMultiplier">DMG Multiplier : </label>
+            <input type="text" id="dmgMultiplier" value="1">
+        </div>
+    </div>
+    <button id="save" onclick="save()">
+        SAVE
+    </button>
 </body>
 
 <script src="p5.min.js"></script>
