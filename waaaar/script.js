@@ -14,6 +14,13 @@ var resolution = 10;
 var cells;
 
 var gameStarted = false;
+
+var health = {
+  green:100,
+  red:100,
+  blue:100
+}
+
 function startGame(){
   gameStarted = true;
 }
@@ -39,8 +46,8 @@ class Cell {
   health = 100;
   color = "NONE"
   isAlive = false;
-  dmg = 1;
-  startDmgMultiplier = 1;
+  healthLosing = 1;
+  initDmgMultiplier = 1;
   dmgMultiplier = 1;
 
   getDamage() {
@@ -56,7 +63,7 @@ class Cell {
     if (this.color == "GREEN" && tempratureOption[tempratureOption.selectedIndex].value == "WARM") { this.dmgMultiplier = 2; }
     if (this.color == "GREEN" && tempratureOption[tempratureOption.selectedIndex].value == "COLD") { this.dmgMultiplier = 1; }
 
-    this.health -= this.dmg;
+    this.health -= this.healthLosing;
   }
 
   createNew(health, color) {
@@ -95,7 +102,7 @@ class Cell {
         break;
     }
 
-    this.health += this.color == cell.color ? cell.health : -cell.health * cell.dmgMultiplier * (cells.length * cells[0].length / amountOfCells);
+    this.health += this.color == cell.color ? cell.health : -cell.health * cell.dmgMultiplier * (cells.length * cells[0].length / amountOfCells) * initDmgMultiplier;
 
   }
 
