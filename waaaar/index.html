@@ -33,6 +33,7 @@
         #save{
             position: absolute;
             top: 600px;
+            left: 300px;
         }
     </style>
 </head>
@@ -68,8 +69,14 @@
             <label for="dmgMultiplier">DMG Multiplier : </label>
             <input type="text" id="dmgMultiplier" value="1">
         </div>
+
+        <div>
+            <label for="maxAge">Max age : </label>
+            <input type="text" id="maxAge" value="1000">
+        </div>
+
     </div>
-    <button id="save" onclick="save()">
+    <button id="save" onclick="saveStats()">
         SAVE
     </button>
 </body>

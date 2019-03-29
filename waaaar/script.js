@@ -22,12 +22,54 @@ var health = {
   blue:100
 }
 
+var dmgMult = {
+  green:1,
+  red:1,
+  blue:1
+}
+
+var healthLost = {
+  green:1,
+  red:1,
+  blue:1
+}
+
+var maxAge = {
+  green:1000,
+  red:1000,
+  blue:1000
+}
+
 function startGame(){
   gameStarted = true;
 }
-function save(){
+function saveStats(){
   var colorOption = document.getElementById("color");
-  var tempratureOption = document.getElementById("temprature");
+  var health = Number( document.getElementById("health").value);
+  var dmgMultiplier = Number(document.getElementById("dmgMultiplier").value);
+  var healthLosing = Number(document.getElementById("healthLost").value);
+  var maxAGE = Number(document.getElementById("maxAge").value);
+   
+  switch (colorOption.value){
+    case "RED":
+    health.red = health;
+    dmgMult.red =dmgMultiplier;
+    healthLost.red = healthLosing;
+    maxAge.red = maxAGE;
+    break;
+    case "BLUE":
+    health.blue = health;
+    dmgMult.blue =dmgMultiplier;
+    healthLost.blue = healthLosing;
+    maxAge.blue = maxAGE;
+    break;
+    case "GREEN":
+    health.green = health;
+    dmgMult.green =dmgMultiplier;
+    healthLost.green = healthLosing;
+    maxAge.greed = maxAGE;
+    break;
+  }
 }
 
 var counter = new Array();
@@ -48,7 +90,7 @@ class Cell {
   healthLosing = 1;
   initDmgMultiplier = 1;
   dmgMultiplier = 1;
-
+ 
   getDamage() {
     if (this.color == "RED" && tempratureOption[tempratureOption.selectedIndex].value == "HOT") { this.dmgMultiplier = 3; }
     if (this.color == "RED" && tempratureOption[tempratureOption.selectedIndex].value == "WARM") { this.dmgMultiplier = 2; }
@@ -66,10 +108,35 @@ class Cell {
     
   }
 
-  createNew(health, color) {
+  createNew(color) {
     this.age = 0;
-    this.color = color;
-    this.health = health;
+    switch(color){
+      case "RED":
+      this.color=color;
+      this.health=health.red;
+      this.healthLosing = healthLost.red;
+      this.initDmgMultiplier = dmgMult.red;
+      this.maxAge = maxAge.red;
+      break;
+      case "GREEN":
+      this.color=color;
+      this.health=health.green;
+      this.healthLosing = healthLost.green;
+      this.initDmgMultiplier = dmgMult.green;
+      this.maxAge = maxAge.green;
+      break;
+      case "BLUE":
+      this.color=color;
+      this.health=health.blue;
+      this.healthLosing = healthLost.blue;
+      this.initDmgMultiplier = dmgMult.blue;
+      this.maxAge = maxAge.blue;
+      break;
+    }
+
+
+
+  
     this.isAlive = true;
   }
 
@@ -149,8 +216,11 @@ function mouseClicked() {
   let i = Math.floor(mouseX / resolution);
   let j = Math.floor(mouseY / resolution);
   if (mouseX < width && mouseY < height && mouseX >= 0 && mouseY >= 0) {
-    cells[i][j].color = getSelctedColor();
-    cells[i][j].isAlive = true;
+   
+     
+     cells[i][j].createNew( getSelctedColor());
+    // cells[i][j].isAlive = true;
+
   }
 }
 
@@ -224,7 +294,7 @@ function createInAround(i, j) {
     if (cells[indexI][indexJ].isAlive) {
       cells[indexI][indexJ].absorbCell(cells[i][j]);
     } else {
-      cells[indexI][indexJ].createNew(100, cells[i][j].color);
+      cells[indexI][indexJ].createNew(cells[i][j].color);
     }
   }
 
