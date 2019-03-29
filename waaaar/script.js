@@ -43,28 +43,55 @@ var maxAge = {
 function startGame(){
   gameStarted = true;
 }
+
+function changeSValues(){
+  var colorOption = document.getElementById("color");
+  switch(colorOption.value){
+      case "RED":
+      document.getElementById("health").value = health.red;
+      document.getElementById("healthLost").value = healthLost.red;
+      document.getElementById("dmgMultiplier").value = dmgMult.red;
+      document.getElementById("maxAge").value = maxAge.red;
+      break;
+      case "BLUE":
+      document.getElementById("health").value = health.blue;
+      document.getElementById("healthLost").value = healthLost.blue;
+      document.getElementById("dmgMultiplier").value = dmgMult.blue;
+      document.getElementById("maxAge").value = maxAge.blue;
+      break;
+      case "GREEN":
+      document.getElementById("health").value = health.green;
+      document.getElementById("healthLost").value = healthLost.green;
+      document.getElementById("dmgMultiplier").value = dmgMult.green;
+      document.getElementById("maxAge").value = maxAge.green;
+      break;
+
+
+  }
+
+}
+
 function saveStats(){
   var colorOption = document.getElementById("color");
-  var health = Number( document.getElementById("health").value);
+  var healthR = Number( document.getElementById("health").value);
   var dmgMultiplier = Number(document.getElementById("dmgMultiplier").value);
   var healthLosing = Number(document.getElementById("healthLost").value);
   var maxAGE = Number(document.getElementById("maxAge").value);
-   
   switch (colorOption.value){
     case "RED":
-    health.red = health;
+    health.red = healthR;
     dmgMult.red =dmgMultiplier;
     healthLost.red = healthLosing;
     maxAge.red = maxAGE;
     break;
     case "BLUE":
-    health.blue = health;
+    health.blue = healthR;
     dmgMult.blue =dmgMultiplier;
     healthLost.blue = healthLosing;
     maxAge.blue = maxAGE;
     break;
     case "GREEN":
-    health.green = health;
+    health.green = healthR;
     dmgMult.green =dmgMultiplier;
     healthLost.green = healthLosing;
     maxAge.greed = maxAGE;
