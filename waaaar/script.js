@@ -110,6 +110,7 @@ function drawCell(x, y, color) {
 
 class Cell {
   health = 100;
+  startHealth = 100;
   age = 0;
   maxAge = 1000;
   color = "NONE"
@@ -120,15 +121,15 @@ class Cell {
  
   getDamage() {
     if (this.color == "RED" && tempratureOption[tempratureOption.selectedIndex].value == "HOT") { this.dmgMultiplier = 3; }
-    if (this.color == "RED" && tempratureOption[tempratureOption.selectedIndex].value == "WARM") { this.dmgMultiplier = 2; }
+    if (this.color == "RED" && tempratureOption[tempratureOption.selectedIndex].value == "NORMAL") { this.dmgMultiplier = 2; }
     if (this.color == "RED" && tempratureOption[tempratureOption.selectedIndex].value == "COLD") { this.dmgMultiplier = 1; }
 
     if (this.color == "BLUE" && tempratureOption[tempratureOption.selectedIndex].value == "HOT") { this.dmgMultiplier = 1; }
-    if (this.color == "BLUE" && tempratureOption[tempratureOption.selectedIndex].value == "WARM") { this.dmgMultiplier = 2; }
+    if (this.color == "BLUE" && tempratureOption[tempratureOption.selectedIndex].value == "NORMAL") { this.dmgMultiplier = 2; }
     if (this.color == "BLUE" && tempratureOption[tempratureOption.selectedIndex].value == "COLD") { this.dmgMultiplier = 3; }
 
     if (this.color == "GREEN" && tempratureOption[tempratureOption.selectedIndex].value == "HOT") { this.dmgMultiplier = 1; }
-    if (this.color == "GREEN" && tempratureOption[tempratureOption.selectedIndex].value == "WARM") { this.dmgMultiplier = 2; }
+    if (this.color == "GREEN" && tempratureOption[tempratureOption.selectedIndex].value == "NORMAL") { this.dmgMultiplier = 2; }
     if (this.color == "GREEN" && tempratureOption[tempratureOption.selectedIndex].value == "COLD") { this.dmgMultiplier = 1; }
 
     this.health -= this.healthLosing;
@@ -176,7 +177,7 @@ class Cell {
 
     if (this.isAlive) {
       this.getDamage();
-      if (this.health % EDGE_FOR_MULTIPLYING == 0) {
+      if (Math.floor(this.health) % Math.floor(this.healthLosing * EDGE_FOR_MULTIPLYING) == 0 && this.health != this.startHealth) {
         return true
       }
 
